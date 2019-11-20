@@ -104,7 +104,7 @@ public class Filmes {
         
 //     System.out.println(+dia + "/" + mes + "/" + ano + " " + data);
         System.out.printf("Valor da meia entrada %.2f\n", meiaEntrada);
-        System.out.printf("Valor da inteira %.2f\n", valorAPagar);
+        System.out.printf("Valor da inteira %.2f\n", valor);
         System.out.printf("valor Total:: %.2f\n", valorAPagar + meiaEntrada);
             
             input.nextLine();
