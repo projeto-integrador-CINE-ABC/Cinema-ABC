@@ -32,37 +32,38 @@ public class Filmes {
                         + "|-----------------------|\n");
                         filme = input.nextInt();
                      
-              //  if (tentativa) {
+            
 //opçoes de filme
                 System.out.println();
                     switch (filme) {
                         case 1:
                             System.out.println("|-----------------------|");
                             System.out.println("|Voce escolhel o filme 1|");
+                            System.out.println("| [1] Dora Aventureira  |");
                             System.out.println("|-----------------------|");
                             break;
                         case 2:
                             System.out.println("|-----------------------|");
                             System.out.println("|Voce escolhel o filme 2|");
+                            System.out.println("| [2] O Morto Não Falan |");
                             System.out.println("|-----------------------|");
                             break;
                         case 3:
                             System.out.println("|-----------------------|");
                             System.out.println("|Voce escolhel o filme 3|");
+                            System.out.println("|[3] A Odiseia Dos Tolos|");
                             System.out.println("|-----------------------|");
                             break;
                         default:
                             System.out.println("|------------------------|");
-                            System.out.println("|filme invalido|");
+                            System.out.println("|Filme invalido!|");
                             System.out.println("|Porfavor tente novamente|");
                             System.out.println("|------------------------|");
                             t++;
                     }
 
                     break;
-                //} else if (filme != 1 || filme != 2 || filme != 3) {
-
-                //}
+              
             } while (filme != 1 || filme != 2 || filme != 3);
 
             if (t == 3) {
