@@ -1,39 +1,42 @@
 package zeus;
 
-import java.awt.Color;
 import java.util.Scanner;
 
 /**
- *
  * @author edivan
  */
 public class Zeus {
 
     static int c1[][] = new int[10][10];
-    static int conta_vendas;
-    static double caixa, meia = 0, cheia, valor = 25.00, valorAPagar;
+    static int conta_vendas, ContaMeia, ContaCheia;
+    static double caixa, meia, cheia, valorAPagar;
+    static double valor = 25.00;
+
+    
+
+    String filmeA;
 
     public static void main(String[] args) {
-
         Scanner input = new Scanner(System.in);
         int sair = 0;
+        
+//ETAPA 1- ENTRADA DE BOAS VINDAS.
+        ClasseMensagem texto = new ClasseMensagem();
+        texto.exibeMensagem();
 
-        System.out.println("------------------------------------------------------------------");
-        System.out.println("------------SEJA BEM VINDO POR FAVOR INFORME SEUS DADOS ----------");
-        System.out.println("------------------------------------------------------------------");
-
-//  ETAPA 1° - CRIAÇÃO DA TELA 
+//ETAPA 1.1 - CRIAÇÃO DA TELA 
         while (sair != 3) {
-            System.out.println("-------------------------------------------------");
-            System.out.println("(1) - VENDAS");
+            System.out.println("\n---------------------------------------------");
+            System.out.println("(1) - MOSTRA E ESCOLHAR O FILME");
             System.out.println("(2) - RELATORIO DE VENDAS");
             System.out.println("(3) - VERIFICA LUGARES DISPONIVEIS");
-            System.out.println("(4) - MOSTRAR FILMES");
-            System.out.println("(5) - SAIR");
-            System.out.println("-------------------------------------------------");
+            System.out.println("(4) - VENDAS");
+            System.out.println("(5) - REEPRESÃO");
+            System.out.println("(6) - SAIR");
+            System.out.println("---------------------------------------------");
             int menu = input.nextInt();
             switch (menu) {
-                case 1: {
+                case 4: {
                     iniciavenda();
                     break;
                 }
@@ -46,11 +49,15 @@ public class Zeus {
                     break;
 
                 }
-                case 4: {
+                case 1: {
                     filmes();
                     break;
                 }
                 case 5: {
+                    consultarlugar();
+                    break;
+                }
+                case 6: {
                     System.exit(0);
                 }
             }
@@ -58,57 +65,96 @@ public class Zeus {
         }
 
     }
-// 2° - TELA DE PROCESSAMENTO DA VENDAS
+// 2° - TELA DE PROCESSAMENTO DA VENDAS ========================================
 
     private static void iniciavenda() {
         Scanner input = new Scanner(System.in);
         int coluna = 0;
-        String linha;
-        int entrada, ContaEntrada, ContaMeia, ContaCheia;
-        ContaEntrada = ContaMeia = ContaCheia = 0;
-        
-       
+        String linha = null;
+        int entrada, ContaEntrada, EntradaColuna;
+        ContaEntrada = 0;
         do {
             System.out.print("[1] Meia entrada ou [2] cheia :: ");
             entrada = input.nextInt();
-            // buff
-            input.nextLine();
 
+//----------    VALOR DA MEIA ENTRADA ------------------------------------------
             if (entrada == 1) {
-//                meia = valor - (valor * .50);
                 meia = valor - (valor * .50);
                 ContaMeia++;
-                System.out.printf("teste de meia: R$ %.2f%n", meia);
+                System.out.printf("Valor da meia entrada R$ %.2f Quantidade: %d%n", meia, ContaMeia);
 
-            } else if (entrada == 2) {
+                System.out.println("\nDigite a linha desejada: ");
+                System.out.println("[A B C D E F G H I J]: ");
+                linha = input.next();
+
+                do {
+                    System.out.println("Digite a coluna desejada: ");
+                    System.out.println("[0 1 2 3 4 5 6 7 8 9]: ");
+                    EntradaColuna = input.nextInt();
+
+                    if (EntradaColuna <= 9 && EntradaColuna >= 0) {
+                        coluna = EntradaColuna;
+                        vetores(linha.charAt(0), coluna);
+                    } else {
+
+                        System.out.println("Valor invalido. Venda Cancelada. favor tentar novamente...");
+                        System.out.printf("%.2f", meia);
+                        ContaMeia--;
+                    }
+
+                } while (EntradaColuna >= 10 && EntradaColuna <= 0);
+
+            } // VALOR DA ENTRADA CHEIA;
+            else if (entrada == 2) {
                 valorAPagar = valor;
                 ContaCheia++;
-                System.out.printf("teste do valor: R$ %.2f%n", valor);
+                System.out.printf("Valor da Entrada Cheia R$ %.2f Quantidade: %d%n", valorAPagar, ContaCheia);
+//                System.out.printf("teste do valor: R$ %.2f%n", valor);
+//                System.out.printf("teste valor Cheia: R$ %.2f%n", valorAPagar);
+                System.out.println("");
+                System.out.println("\nDigite a linha desejada: ");
+                System.out.println("[A B C D E F G H I J]: ");
+                linha = input.next();
+                do {
+                    System.out.println("Digite a coluna desejada: ");
+                    System.out.println("[0 1 2 3 4 5 6 7 8 9]: ");
+                    EntradaColuna = input.nextInt();
+                    if (EntradaColuna <= 9 && EntradaColuna >= 0) {
+                        coluna = EntradaColuna;
+                        
+                        vetores(linha.charAt(0), coluna);
+                    } else {
+                        System.out.println("Valor invalido, favor tentar novamente...");
+//                        valor -= valor;
+                        ContaCheia--;
+                    }
+                } while (EntradaColuna >= 10 && EntradaColuna <= 0);
             }
             // Conta todas as entradas
             ContaEntrada++;
 
         } while (entrada != 1 && entrada != 2);
 
-        System.out.println("\nDigite a linha desejada: ");
-        System.out.println("[A B C D E F G H I J]: ");
-        linha = input.next();
-        
-        int EntradaColuna;
-        do {
-            System.out.println("Digite a coluna desejada: ");
-            System.out.println("[0 1 2 3 4 5 6 7 8 9]: ");
-            EntradaColuna = input.nextInt();
-
-            if (EntradaColuna <= 9 && EntradaColuna >= 0) {
-                coluna = EntradaColuna;
-                vetores(linha.charAt(0), coluna);
-            } else {
-                System.out.println("Valor invalido, favor tentar novamente...");
-                meia -= meia;
-            }
-            
-        } while (EntradaColuna >= 10 && EntradaColuna <= 0);
+//        System.out.println("\nDigite a linha desejada: ");
+//        System.out.println("[A B C D E F G H I J]: ");
+//        linha = input.next();
+        // Armazena dados na coluna
+//        int EntradaColuna;
+//        do {
+//            System.out.println("Digite a coluna desejada: ");
+//            System.out.println("[0 1 2 3 4 5 6 7 8 9]: ");
+//            EntradaColuna = input.nextInt();
+//
+//            if (EntradaColuna <= 9 && EntradaColuna >= 0) {
+//                coluna = EntradaColuna;
+//                vetores(linha.charAt(0), coluna);
+//            } else {
+//
+//                System.out.println("Valor invalido, favor tentar novamente...");
+//                meia -= meia;
+//            }
+//
+//        } while (EntradaColuna >= 10 && EntradaColuna <= 0);
 //        System.out.println("Digite a coluna desejada: ");
 //        System.out.println("[0 1 2 3 4 5 6 7 8 9]: ");
 //        int EntradaColuna = input.nextInt();
@@ -119,7 +165,6 @@ public class Zeus {
 //        } else {
 //            System.out.println("opção maior que 9");
 //        }
-
 //        vetores(linha.charAt(0), coluna);
     }
 
@@ -131,10 +176,24 @@ public class Zeus {
         System.out.println("");
         System.out.println("Total de Ingressos Vendidos: " + conta_vendas);
         System.out.printf("Total em Reais: R$ %.2f%n", caixa);
-        System.out.printf("Total em meia: R$ %.2f%n", meia);
 
-        System.out.printf("Total em valor: R$ %.2f%n", valorAPagar + meia);
-        System.out.println("Relação de Poltronas Vendidas: ");
+//        System.out.printf("Total em meia Entrada: R$ %.2f%n", meia);
+        System.out.println("******************************************************************");
+        System.out.println("VALOR DA MEIA ENTRADA:");
+        System.out.printf("JOEL - Valor da meia entrada R$ %.2f \t\tQuantidade: %d%n", meia * ContaMeia, ContaMeia);
+        System.out.println("------------------------------------------------------------------");
+        
+        System.out.println("\nVALOR DA CHEIA");
+        System.out.printf("JOEL - valor a pagar: R$ %.2f \t\t\tQuantidade: %d%n", valorAPagar, ContaCheia);
+        System.out.println("------------------------------------------------------------------");
+        
+        System.out.println("SOMA TOTAL = MEIA + CHEIA:");
+        System.out.printf("JOEL - valor a pagar: R$ %.2f \t\t\tQuantidades: %d%n", valorAPagar + (meia * ContaMeia),ContaMeia + ContaCheia);
+        System.out.println("------------------------------------------------------------------");
+        
+        
+
+        System.out.println("\nRelação de Poltronas Vendidas: ");
         for (int linha = 0; linha < c1.length - 1; linha++) {
             for (int coluna = 0; coluna < 10; coluna++) {
                 if (c1[linha][coluna] != 0) {
@@ -157,6 +216,7 @@ public class Zeus {
                     System.out.println((char) ('A' + i) + "" + j + " Livre");
                 }
             }
+            System.out.println("\t");
         }
     }
 
@@ -211,6 +271,8 @@ public class Zeus {
         }
 
     }
+// --------------------------------- FILMES ---------------------------------
+//===========================================================================
 
     private static void filmes() {
         Scanner input = new Scanner(System.in);
@@ -239,6 +301,7 @@ public class Zeus {
                 System.out.println();
                 switch (filme) {
                     case 1:
+
                         System.out.println("-------------------------------------------------");
                         System.out.println(" Você escolheu o filme 1. ");
                         System.out.println(" (1) Dora Aventureira.  ");
@@ -283,4 +346,14 @@ public class Zeus {
 
         } while (opcao.equalsIgnoreCase("s"));
     }
+    private static void consultarlugar() {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < c1.length; j++) {
+                if (c1[i][j] == 0) {
+                    System.out.println((char) ('A' + i) + "" + j + " Livre");
+                }
+            }
+        }
+    }
 }
+
