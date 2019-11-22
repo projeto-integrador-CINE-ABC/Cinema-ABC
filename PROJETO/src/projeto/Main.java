@@ -17,9 +17,11 @@ public class Zeus {
 
         Scanner input = new Scanner(System.in);
         int sair = 0;
+
         System.out.println("------------------------------------------------------------------");
         System.out.println("------------SEJA BEM VINDO POR FAVOR INFORME SEUS DADOS ----------");
         System.out.println("------------------------------------------------------------------");
+
 //  ETAPA 1° - CRIAÇÃO DA TELA 
         while (sair != 3) {
             System.out.println("-------------------------------------------------");
@@ -57,13 +59,15 @@ public class Zeus {
 
     }
 // 2° - TELA DE PROCESSAMENTO DA VENDAS
+
     private static void iniciavenda() {
         Scanner input = new Scanner(System.in);
-        int coluna;
+        int coluna = 0;
         String linha;
         int entrada, ContaEntrada, ContaMeia, ContaCheia;
         ContaEntrada = ContaMeia = ContaCheia = 0;
-
+        
+       
         do {
             System.out.print("[1] Meia entrada ou [2] cheia :: ");
             entrada = input.nextInt();
@@ -83,21 +87,42 @@ public class Zeus {
             }
             // Conta todas as entradas
             ContaEntrada++;
-            
 
         } while (entrada != 1 && entrada != 2);
 
         System.out.println("\nDigite a linha desejada: ");
         System.out.println("[A B C D E F G H I J]: ");
         linha = input.next();
+        
+        int EntradaColuna;
+        do {
+            System.out.println("Digite a coluna desejada: ");
+            System.out.println("[0 1 2 3 4 5 6 7 8 9]: ");
+            EntradaColuna = input.nextInt();
 
-        System.out.println("Digite a coluna desejada: ");
-        System.out.println("[0 1 2 3 4 5 6 7 8 9]: ");
-        coluna = input.nextInt();
-        
-        
-        vetores(linha.charAt(0), coluna);
+            if (EntradaColuna <= 9 && EntradaColuna >= 0) {
+                coluna = EntradaColuna;
+                vetores(linha.charAt(0), coluna);
+            } else {
+                System.out.println("Valor invalido, favor tentar novamente...");
+                meia -= meia;
+            }
+            
+        } while (EntradaColuna >= 10 && EntradaColuna <= 0);
+//        System.out.println("Digite a coluna desejada: ");
+//        System.out.println("[0 1 2 3 4 5 6 7 8 9]: ");
+//        int EntradaColuna = input.nextInt();
+//
+//        if (EntradaColuna <= 9 && EntradaColuna >= 0) {
+//            coluna = EntradaColuna;
+//            vetores(linha.charAt(0), coluna);
+//        } else {
+//            System.out.println("opção maior que 9");
+//        }
+
+//        vetores(linha.charAt(0), coluna);
     }
+
     // 3° - TELA DE PROCESSAMENTO DO RELATORIO
     private static void relatorio() {
         System.out.println("------------------------------------------------------------------");
@@ -107,7 +132,7 @@ public class Zeus {
         System.out.println("Total de Ingressos Vendidos: " + conta_vendas);
         System.out.printf("Total em Reais: R$ %.2f%n", caixa);
         System.out.printf("Total em meia: R$ %.2f%n", meia);
-        
+
         System.out.printf("Total em valor: R$ %.2f%n", valorAPagar + meia);
         System.out.println("Relação de Poltronas Vendidas: ");
         for (int linha = 0; linha < c1.length - 1; linha++) {
@@ -115,26 +140,26 @@ public class Zeus {
                 if (c1[linha][coluna] != 0) {
                     System.out.println("Cadeira [" + (char) ('A' + linha) + "" + coluna + "] vendida.");
                 }
-
             }
         }
         System.out.println("");
         System.out.println("******************************************************************");
 
     }
+
     // OPÇÃO 3:
     //      4° - PROCESAMENTO DA CONSULTA
     //      verificar as cadeiras Livres.
     private static void consultar() {
         for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+            for (int j = 0; j < c1.length; j++) {
                 if (c1[i][j] == 0) {
                     System.out.println((char) ('A' + i) + "" + j + " Livre");
                 }
             }
         }
     }
-    
+
     public static void vetores(char linha, int col) {
         int lin = (int) linha - 'a';
 //            lin = (int) linha - 'A';
@@ -150,11 +175,20 @@ public class Zeus {
                     System.out.println("=   VENDA EFETUADA COM SUCESSO   =");
                     System.out.println("----------------------------------");
                     caixa = caixa + meia;
-
                     conta_vendas++;
+
+                } else if (col >= 10) {
+//                    double preco2 = valor;
+//                    System.out.println("Posicão livre");
+//                    c1[lin][col] = 1;
+//                    System.out.println("----------------------------------");
+//                    System.out.println("->  VENDA EFETUADA COM SUCESSO  <-");
+//                    System.out.println("----------------------------------");
+//                    caixa = caixa + valor;
+//                    conta_vendas++;
                 } else {
 //                    double preco2 = valor;
-                    System.out.println("Posicao livre");
+                    System.out.println("Posicão livre");
                     c1[lin][col] = 1;
                     System.out.println("----------------------------------");
                     System.out.println("->  VENDA EFETUADA COM SUCESSO  <-");
@@ -179,6 +213,74 @@ public class Zeus {
     }
 
     private static void filmes() {
-        System.out.println("filmes");
+        Scanner input = new Scanner(System.in);
+        //variavel de tentativa
+        int t = 0;
+        //variavel que vai dar o rumo a escolha do filme
+        int filme = 0;
+        //variavel de saida que esta atrelada ao while
+        String opcao;
+        //variavel que vai controlar o if e suas respectivas condiçoes
+        boolean tentativa = true;
+
+        do {//loop de saida
+            do {//loop das escolhas de filme
+                System.out.println("-------------------------------------------------");
+                System.out.println("ESCOLHA O FILME ABAIXO:\n"
+                        + "A partir das opções aseguir :\n"
+                        + "-------------------------------------------------\n"
+                        + "(1) Dora Aventureira.    \n"
+                        + "(2) O Morto não Fala.    \n"
+                        + "(3) A Odiseia dos Tolos.  \n"
+                        + "-------------------------------------------------\n");
+                filme = input.nextInt();
+
+                //opçoes de filme
+                System.out.println();
+                switch (filme) {
+                    case 1:
+                        System.out.println("-------------------------------------------------");
+                        System.out.println(" Você escolheu o filme 1. ");
+                        System.out.println(" (1) Dora Aventureira.  ");
+                        System.out.println("-------------------------------------------------");
+                        break;
+                    case 2:
+                        System.out.println("-------------------------------------------------");
+                        System.out.println(" Você escolheu o filme 2. ");
+                        System.out.println(" (2) O Morto Não Fala. ");
+                        System.out.println("-------------------------------------------------");
+                        break;
+                    case 3:
+                        System.out.println("-------------------------------------------------");
+                        System.out.println(" Você escolheu o filme 3. ");
+                        System.out.println(" (1) A Odiseia Dos Tolos. ");
+                        System.out.println("-------------------------------------------------");
+                        break;
+                    default:
+                        System.out.println("-------------------------------------------------");
+                        System.out.println(" Filme inválido! ");
+                        System.out.println(" Por favor tente novamente 1");
+                        System.out.println("-------------------------------------------------");
+                        t++;
+                }
+
+                break;
+
+            } while (filme != 1 || filme != 2 || filme != 3);
+
+            if (t == 3) {
+                System.out.println("-------------------------------------------------");
+                System.out.println("Seu número de tentativas acabaram");
+                System.out.println("-------------------------------------------------");
+                break;
+            }
+
+            input.nextLine();
+            System.out.println("-------------------------------------------------");
+            System.out.print("Deseja continuar : [s] - Sim [n] - Não\n");
+            System.out.println("-------------------------------------------------");
+            opcao = input.nextLine();
+
+        } while (opcao.equalsIgnoreCase("s"));
     }
 }
