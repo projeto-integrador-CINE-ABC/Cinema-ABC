@@ -12,14 +12,12 @@ public class Zeus {
     static double caixa, meia, cheia, valorAPagar;
     static double valor = 25.00;
 
-    
-
     String filmeA;
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         int sair = 0;
-        
+
 //ETAPA 1- ENTRADA DE BOAS VINDAS.
         ClasseMensagem texto = new ClasseMensagem();
         texto.exibeMensagem();
@@ -121,7 +119,7 @@ public class Zeus {
                     EntradaColuna = input.nextInt();
                     if (EntradaColuna <= 9 && EntradaColuna >= 0) {
                         coluna = EntradaColuna;
-                        
+
                         vetores(linha.charAt(0), coluna);
                     } else {
                         System.out.println("Valor invalido, favor tentar novamente...");
@@ -182,16 +180,14 @@ public class Zeus {
         System.out.println("VALOR DA MEIA ENTRADA:");
         System.out.printf("JOEL - Valor da meia entrada R$ %.2f \t\tQuantidade: %d%n", meia * ContaMeia, ContaMeia);
         System.out.println("------------------------------------------------------------------");
-        
+
         System.out.println("\nVALOR DA CHEIA");
         System.out.printf("JOEL - valor a pagar: R$ %.2f \t\t\tQuantidade: %d%n", valorAPagar, ContaCheia);
         System.out.println("------------------------------------------------------------------");
-        
+
         System.out.println("SOMA TOTAL = MEIA + CHEIA:");
-        System.out.printf("JOEL - valor a pagar: R$ %.2f \t\t\tQuantidades: %d%n", valorAPagar + (meia * ContaMeia),ContaMeia + ContaCheia);
+        System.out.printf("JOEL - valor a pagar: R$ %.2f \t\t\tQuantidades: %d%n", valorAPagar + (meia * ContaMeia), ContaMeia + ContaCheia);
         System.out.println("------------------------------------------------------------------");
-        
-        
 
         System.out.println("\nRelação de Poltronas Vendidas: ");
         for (int linha = 0; linha < c1.length - 1; linha++) {
@@ -282,8 +278,10 @@ public class Zeus {
         int filme = 0;
         //variavel de saida que esta atrelada ao while
         String opcao;
-        //variavel que vai controlar o if e suas respectivas condiçoes
-        boolean tentativa = true;
+        //variavel que  vai contar os filmes escolhidos
+        int cont_filme1, cont_filme2, cont_filme3;
+        //inicializando variavel dos cont
+        cont_filme1 = cont_filme2 = cont_filme3 = 0;
 
         do {//loop de saida
             do {//loop das escolhas de filme
@@ -301,24 +299,27 @@ public class Zeus {
                 System.out.println();
                 switch (filme) {
                     case 1:
-
                         System.out.println("-------------------------------------------------");
                         System.out.println(" Você escolheu o filme 1. ");
                         System.out.println(" (1) Dora Aventureira.  ");
                         System.out.println("-------------------------------------------------");
+                        cont_filme1++;
                         break;
                     case 2:
                         System.out.println("-------------------------------------------------");
                         System.out.println(" Você escolheu o filme 2. ");
                         System.out.println(" (2) O Morto Não Fala. ");
                         System.out.println("-------------------------------------------------");
+                        cont_filme2++;
                         break;
                     case 3:
                         System.out.println("-------------------------------------------------");
                         System.out.println(" Você escolheu o filme 3. ");
                         System.out.println(" (1) A Odiseia Dos Tolos. ");
                         System.out.println("-------------------------------------------------");
+                        cont_filme3++;
                         break;
+
                     default:
                         System.out.println("-------------------------------------------------");
                         System.out.println(" Filme inválido! ");
@@ -330,7 +331,13 @@ public class Zeus {
                 break;
 
             } while (filme != 1 || filme != 2 || filme != 3);
+            System.out.println("-------------------------------------------------");
+            System.out.println("Total de Filmes Escolidos\n");
+            System.out.println(" O Publico de Dora Aventureira foi :  " + cont_filme1);
+            System.out.println(" O Publico de O Morto Não Fala foi :  " + cont_filme2);
+            System.out.println(" O Publico de A Odiseia Dos Tolos  :  " + cont_filme3);
 
+            System.out.println("-------------------------------------------------");
             if (t == 3) {
                 System.out.println("-------------------------------------------------");
                 System.out.println("Seu número de tentativas acabaram");
@@ -345,7 +352,12 @@ public class Zeus {
             opcao = input.nextLine();
 
         } while (opcao.equalsIgnoreCase("s"));
+        System.out.println("-------------------------------------------------");
+        System.out.println(" O Total de Filmes Asistidos foi de : " + (cont_filme1 + cont_filme2 + cont_filme3));
+        System.out.println("-------------------------------------------------");
+
     }
+
     private static void consultarlugar() {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < c1.length; j++) {
@@ -356,4 +368,3 @@ public class Zeus {
         }
     }
 }
-
