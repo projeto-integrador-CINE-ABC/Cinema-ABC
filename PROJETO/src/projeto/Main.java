@@ -1,9 +1,15 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package zeus;
 
 import java.util.Scanner;
 
 /**
- * @author edivan
+ *
+ * @author Computador
  */
 public class Zeus {
 
@@ -12,15 +18,17 @@ public class Zeus {
     static double caixa, meia, cheia, valorAPagar;
     static double valor = 25.00;
 
+    
+
     String filmeA;
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         int sair = 0;
-
+        
 //ETAPA 1- ENTRADA DE BOAS VINDAS.
-        ClasseMensagem texto = new ClasseMensagem();
-        texto.exibeMensagem();
+  //      ClasseMensagem texto = new ClasseMensagem();
+    //    texto.exibeMensagem();
 
 //ETAPA 1.1 - CRIAÇÃO DA TELA 
         while (sair != 3) {
@@ -110,7 +118,7 @@ public class Zeus {
 //                System.out.printf("teste do valor: R$ %.2f%n", valor);
 //                System.out.printf("teste valor Cheia: R$ %.2f%n", valorAPagar);
                 System.out.println("");
-                System.out.println("\nDigite a linha desejada: ");
+                System.out.println("\nDigite a linha Cadeira: ");
                 System.out.println("[A B C D E F G H I J]: ");
                 linha = input.next();
                 do {
@@ -119,7 +127,7 @@ public class Zeus {
                     EntradaColuna = input.nextInt();
                     if (EntradaColuna <= 9 && EntradaColuna >= 0) {
                         coluna = EntradaColuna;
-
+                        
                         vetores(linha.charAt(0), coluna);
                     } else {
                         System.out.println("Valor invalido, favor tentar novamente...");
@@ -180,14 +188,16 @@ public class Zeus {
         System.out.println("VALOR DA MEIA ENTRADA:");
         System.out.printf("JOEL - Valor da meia entrada R$ %.2f \t\tQuantidade: %d%n", meia * ContaMeia, ContaMeia);
         System.out.println("------------------------------------------------------------------");
-
+        
         System.out.println("\nVALOR DA CHEIA");
         System.out.printf("JOEL - valor a pagar: R$ %.2f \t\t\tQuantidade: %d%n", valorAPagar, ContaCheia);
         System.out.println("------------------------------------------------------------------");
-
+        
         System.out.println("SOMA TOTAL = MEIA + CHEIA:");
-        System.out.printf("JOEL - valor a pagar: R$ %.2f \t\t\tQuantidades: %d%n", valorAPagar + (meia * ContaMeia), ContaMeia + ContaCheia);
+        System.out.printf("JOEL - valor a pagar: R$ %.2f \t\t\tQuantidades: %d%n", valorAPagar + (meia * ContaMeia),ContaMeia + ContaCheia);
         System.out.println("------------------------------------------------------------------");
+        
+        
 
         System.out.println("\nRelação de Poltronas Vendidas: ");
         for (int linha = 0; linha < c1.length - 1; linha++) {
@@ -206,13 +216,21 @@ public class Zeus {
     //      4° - PROCESAMENTO DA CONSULTA
     //      verificar as cadeiras Livres.
     private static void consultar() {
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < c1.length; j++) {
-                if (c1[i][j] == 0) {
-                    System.out.println((char) ('A' + i) + "" + j + " Livre");
+        for (int i = 0; i < 10; i++) {                  // para cada linha
+            for (int j = 0; j < c1.length; j++) {       //para cada coluna da linha
+                System.out.print("[");                  // Inicia a impressao do lugar
+                if (c1[i][j] == 0) {                    // testa se está livre
+                    // imprime o número da cadeira livre
+                    System.out.print((char) ('A' + i) + "" + j); 
+                }else{
+                    // Como não está livre, imprime dois espacos em branco
+                    System.out.print("  ");                      
                 }
+                // Finaliza a impressao do lugar e acrescenta dois espaços para separar um lugar do outro
+                System.out.print("]  "); 
             }
-            System.out.println("\t");
+            // Pula uma linha para a nova fileira de cadeiras
+            System.out.println(); 
         }
     }
 
@@ -355,9 +373,8 @@ public class Zeus {
         System.out.println("-------------------------------------------------");
         System.out.println(" O Total de Filmes Asistidos foi de : " + (cont_filme1 + cont_filme2 + cont_filme3));
         System.out.println("-------------------------------------------------");
-
+    
     }
-
     private static void consultarlugar() {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < c1.length; j++) {
